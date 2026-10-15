@@ -1,21 +1,23 @@
-
-* {
+/* ── Reset & base ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
   background: #f4f7f4;
   color: #183326;
 }
 
+/* ── Layout shell ────────────────────────────────────────────────────────── */
 .app {
   max-width: 1400px;
   margin: auto;
   padding: 24px;
 }
 
+/* ── Header ──────────────────────────────────────────────────────────────── */
 .header {
   display: flex;
   align-items: center;
@@ -27,9 +29,11 @@ body {
 .header h1 {
   margin: 0;
   font-size: 32px;
+  color: #183326;
 }
 
 .header p {
+  margin: 4px 0 0;
   color: #647568;
 }
 
@@ -38,24 +42,32 @@ body {
   padding: 10px 14px;
   border-radius: 8px;
   color: #176534;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 4px;
 }
 
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
 button {
-  padding: 11px 16px;
+  padding: 10px 15px;
   border: none;
   border-radius: 7px;
   background: #198754;
   color: white;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background: #146c43;
 }
 
@@ -68,13 +80,23 @@ button.secondary {
   background: #647568;
 }
 
-.status {
-  padding: 12px;
-  background: #e5efe7;
-  border-radius: 7px;
-  margin: 18px 0;
+button.secondary:hover:not(:disabled) {
+  background: #4d5a50;
 }
 
+/* ── Status message ──────────────────────────────────────────────────────── */
+.status {
+  padding: 12px 16px;
+  background: #e5efe7;
+  border-radius: 7px;
+  margin: 14px 0;
+  font-size: 14px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Map + details grid ──────────────────────────────────────────────────── */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(240px, 1fr);
@@ -82,12 +104,13 @@ button.secondary {
 }
 
 .map {
-  height: 550px;
+  height: 560px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #d4ded6;
 }
 
+/* ── Details sidebar ─────────────────────────────────────────────────────── */
 .details {
   background: white;
   border-radius: 12px;
@@ -98,16 +121,62 @@ button.secondary {
 
 .details h2 {
   margin-top: 0;
+  font-size: 18px;
+  color: #183326;
 }
 
+.details p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Farm name input ─────────────────────────────────────────────────────── */
+.field-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.farm-name-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d4ded6;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.farm-name-input:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 2px #19875430;
+}
+
+/* ── Validated badge ─────────────────────────────────────────────────────── */
+.validated-badge {
+  background: #dff5e5;
+  color: #176534;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── Hint box ────────────────────────────────────────────────────────────── */
 .hint {
   background: #f0f6f1;
   padding: 12px;
   border-radius: 7px;
   line-height: 1.7;
   font-size: 13px;
+  margin-top: 14px;
 }
 
+/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 750px) {
   .layout {
     grid-template-columns: 1fr;
@@ -118,7 +187,7 @@ button.secondary {
   }
 
   .header {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
   }
 }
